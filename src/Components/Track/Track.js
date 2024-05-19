@@ -1,5 +1,5 @@
 import React from "react";
-import "Track.css";
+import "./Track.css";
 
 function Track() {
   const renderAction = (isRemoval) => (isRemoval ? "-" : "+");
