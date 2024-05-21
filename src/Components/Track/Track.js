@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Track.css";
 
-function Track() {
-  const renderAction = (isRemoval) => (isRemoval ? "-" : "+");
+function RenderAction(isRemoval) {
+  if (isRemoval) {
+    return <button className="Track-action">-</button>;
+  } else {
+    return <button className="Track-action">-</button>;
+  }
+}
+
+function Track(props) {
+  //const [song, setSong] = useState(props.track);
 
   return (
     <div className="Track">
       <div className="Track-information">
-        <h3>track name will go here </h3>
-        <p>track artist will go here | track album will go here </p>
+        <h3>{props.track.name} </h3>
+        <p>
+          {props.track.artist} | {props.track.album}{" "}
+        </p>
       </div>
-      <button className="Track-action"> {renderAction}</button>
+      <RenderAction isRemoval={true} />
     </div>
   );
 }
