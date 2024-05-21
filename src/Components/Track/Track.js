@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import "./Track.css";
 
-function RenderAction(isRemoval) {
-  if (isRemoval) {
-    return <button className="Track-action">-</button>;
-  } else {
-    return <button className="Track-action">-</button>;
-  }
-}
-
 function Track(props) {
-  //const [song, setSong] = useState(props.track);
+  const addTrack = () => {
+    props.onAdd(props.track);
+    console.log("+ clicked");
+  };
+
+  const renderAction = () => {
+    if (props.isRemoval) {
+      return <button className="Track-action">-</button>;
+    } else {
+      return (
+        <button className="Track-action" onClick={addTrack}>
+          +
+        </button>
+      );
+    }
+  };
 
   return (
     <div className="Track">
@@ -20,7 +27,7 @@ function Track(props) {
           {props.track.artist} | {props.track.album}{" "}
         </p>
       </div>
-      <RenderAction isRemoval={true} />
+      {renderAction()}
     </div>
   );
 }

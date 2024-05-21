@@ -8,7 +8,7 @@ function TrackList(props) {
       {
         /*<!-- You will add a map method that renders a set of Track components  -->*/
         props.tracks.map((track) => (
-          <Track key={track.id} track={track} />
+          <Track key={track.id} track={track} onAdd={props.onAdd} />
         ))
       }
     </div>
