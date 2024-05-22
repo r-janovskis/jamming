@@ -39,6 +39,10 @@ function App() {
     setPlaylist((prev) => [...prev, track]);
   };
 
+  const removeTrack = (track) => {
+    setPlaylist(playlist.filter((song) => song.id != track.id));
+  };
+
   const [searchResults, setSearchResults] = useState(searchTracks);
 
   const [playlist, setPlaylist] = useState(playlistTracks);
@@ -53,7 +57,11 @@ function App() {
         <SearchBar />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlist} playlistName={playlistName} />
+          <Playlist
+            playlistTracks={playlist}
+            playlistName={playlistName}
+            onRemove={removeTrack}
+          />
         </div>
       </div>
     </div>
