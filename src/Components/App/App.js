@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
@@ -43,10 +43,20 @@ function App() {
     setPlaylist(playlist.filter((song) => song.id != track.id));
   };
 
+  const updatePlaylistName = (name) => {
+    setPlaylistName(name);
+  };
+
   const [searchResults, setSearchResults] = useState(searchTracks);
 
   const [playlist, setPlaylist] = useState(playlistTracks);
-  const [playlistName, setPlaylistName] = useState("Reinis Favorite");
+  const [playlistName, setPlaylistName] = useState("");
+
+  /*
+  useEffect(() => {
+    console.log(playlistName);
+  }, [playlistName]);
+  */
 
   return (
     <div>
@@ -61,6 +71,7 @@ function App() {
             playlistTracks={playlist}
             playlistName={playlistName}
             onRemove={removeTrack}
+            onNameChange={updatePlaylistName}
           />
         </div>
       </div>
