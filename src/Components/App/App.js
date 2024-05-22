@@ -11,12 +11,14 @@ function App() {
       name: "Track1",
       artist: "Artist1",
       album: "album1",
+      uri: "abc",
     },
     {
       id: 2,
       name: "Track2",
       artist: "Artist2",
       album: "album2",
+      uri: "ijk",
     },
   ];
 
@@ -26,9 +28,11 @@ function App() {
       name: "Best Track Ever",
       artist: "My favorite BAND",
       album: "Always in tune!",
+      uri: "xwz",
     },
   ];
 
+  const [playlist, setPlaylist] = useState(playlistTracks);
   const addTrack = (track) => {
     // Check if track's ID is already in playlist
     if (playlist.find((song) => song.id === track.id)) {
@@ -43,14 +47,18 @@ function App() {
     setPlaylist(playlist.filter((song) => song.id != track.id));
   };
 
+  const [playlistName, setPlaylistName] = useState("");
   const updatePlaylistName = (name) => {
     setPlaylistName(name);
   };
 
   const [searchResults, setSearchResults] = useState(searchTracks);
 
-  const [playlist, setPlaylist] = useState(playlistTracks);
-  const [playlistName, setPlaylistName] = useState("");
+  const savePlaylist = () => {
+    const trackURIs = playlist.map((track) => track.uri);
+    //console.log(`Playlist: ${playlistName}`);
+    //trackURIs.forEach((uri) => console.log(uri));
+  };
 
   /*
   useEffect(() => {
@@ -72,6 +80,7 @@ function App() {
             playlistName={playlistName}
             onRemove={removeTrack}
             onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
           />
         </div>
       </div>
