@@ -60,11 +60,16 @@ function App() {
     //trackURIs.forEach((uri) => console.log(uri));
   };
 
-  /*
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const search = (search) => {
+    setSearchTerm(search);
+    //console.log(search);
+  };
+
   useEffect(() => {
-    console.log(playlistName);
-  }, [playlistName]);
-  */
+    console.log(searchTerm);
+  }, [playlistName, searchTerm]);
 
   return (
     <div>
@@ -72,7 +77,7 @@ function App() {
         Ja<span className="highlight">mmm</span>ing
       </h1>
       <div className="App">
-        <SearchBar />
+        <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist
