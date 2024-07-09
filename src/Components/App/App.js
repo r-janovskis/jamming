@@ -34,6 +34,8 @@ function App() {
     //trackURIs.forEach((uri) => console.log(uri));
     Spotify.savePlaylist(playlistName, trackURIs);
     setPlaylistName("");
+
+    document.getElementById("playlist-input").value = "New Playlist";
     setPlaylist([]);
   };
 
@@ -47,18 +49,7 @@ function App() {
     //console.log(Spotify.search(searchTerm));
     //console.log(search);
   };
-  /*
-  useEffect(() => {
-    console.log(searchTerm);
-    Spotify.search(searchTerm)
-      .then((results) => {
-        setSearchResults(results);
-      })
-      .catch((error) => {
-        console.error("Error fetching search results:", error);
-      });
-  }, [searchTerm]);
-*/
+
   return (
     <div>
       <h1>
