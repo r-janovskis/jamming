@@ -75,6 +75,70 @@ const Spotify = {
       return [];
     }
   },
+
+  savePlaylist: async (title, trackURIs) => {
+    if (!title || trackURIs.length === 0) {
+      return;
+    }
+
+    const localAccessToken = Spotify.getAccessToken();
+    const callHeader = {
+      Authorization: `Bearer ${localAccessToken}`,
+    };
+
+    let userID = "";
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/me`, {
+        headers: callHeader,
+      });
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        userID = jsonResponse.id;
+      } else {
+        throw new Error("Request Failed!");
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      return [];
+    }
+
+    let playlistID;
+    // Call to create playlist in spotify
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/users/${userID}/playlists`,
+        {
+          method: "POST",
+          headers: callHeader,
+          body: JSON.stringify({ name: title }),
+        }
+      );
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        playlistID = jsonResponse.id;
+      } else {
+        throw new Error("Request Failed!");
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      return [];
+    }
+
+    // Call to populate playlist in spotify with tracks
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
+        {
+          method: "POST",
+          headers: callHeader,
+          body: JSON.stringify({ uris: trackURIs }),
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      return [];
+    }
+  },
 };
 
 export default Spotify;

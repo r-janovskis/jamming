@@ -32,6 +32,9 @@ function App() {
     const trackURIs = playlist.map((track) => track.uri);
     //console.log(`Playlist: ${playlistName}`);
     //trackURIs.forEach((uri) => console.log(uri));
+    Spotify.savePlaylist(playlistName, trackURIs);
+    setPlaylistName("");
+    setPlaylist([]);
   };
 
   const [searchTerm, setSearchTerm] = useState("");
