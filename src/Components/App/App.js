@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
+import Spotify from "../../util/Spotify";
 
 function App() {
   const searchTracks = [
@@ -62,15 +63,26 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const search = (search) => {
+  const search = async (search) => {
     setSearchTerm(search);
+    const results = await Spotify.search(search);
+    setSearchResults(results);
+    //console.log(searchTerm);
+    //console.log(Spotify.search(searchTerm));
     //console.log(search);
   };
-
+  /*
   useEffect(() => {
     console.log(searchTerm);
-  }, [playlistName, searchTerm]);
-
+    Spotify.search(searchTerm)
+      .then((results) => {
+        setSearchResults(results);
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      });
+  }, [searchTerm]);
+*/
   return (
     <div>
       <h1>
