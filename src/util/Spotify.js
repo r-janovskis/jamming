@@ -7,7 +7,7 @@ const redirectURI = "http://localhost:3000/";
 const Spotify = {
   getAccessToken() {
     if (accessToken) {
-      console.log("Token already in system");
+      //console.log("Token already in system");
       return accessToken;
     }
     const url = window.location.href;
@@ -26,7 +26,7 @@ const Spotify = {
         alert("Token expired!");
       }, expirationTime * 1000);
       window.history.pushState("Access Token", null, "/");
-      console.log("New token set");
+      //console.log("New token set");
       return accessToken;
     } else {
       window.location = `https://accounts.spotify.com/authorize?client_id=${applicationID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
@@ -42,7 +42,7 @@ const Spotify = {
 
     const localAccessToken = Spotify.getAccessToken();
 
-    console.log(`Local Access token used in fetch: ${localAccessToken}`);
+    //console.log(`Local Access token used in fetch: ${localAccessToken}`);
 
     try {
       const response = await fetch(

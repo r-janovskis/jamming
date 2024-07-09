@@ -6,34 +6,7 @@ import Playlist from "../Playlist/Playlist";
 import Spotify from "../../util/Spotify";
 
 function App() {
-  const searchTracks = [
-    {
-      id: 1,
-      name: "Track1",
-      artist: "Artist1",
-      album: "album1",
-      uri: "abc",
-    },
-    {
-      id: 2,
-      name: "Track2",
-      artist: "Artist2",
-      album: "album2",
-      uri: "ijk",
-    },
-  ];
-
-  const playlistTracks = [
-    {
-      id: 57,
-      name: "Best Track Ever",
-      artist: "My favorite BAND",
-      album: "Always in tune!",
-      uri: "xwz",
-    },
-  ];
-
-  const [playlist, setPlaylist] = useState(playlistTracks);
+  const [playlist, setPlaylist] = useState([]);
   const addTrack = (track) => {
     // Check if track's ID is already in playlist
     if (playlist.find((song) => song.id === track.id)) {
@@ -53,7 +26,7 @@ function App() {
     setPlaylistName(name);
   };
 
-  const [searchResults, setSearchResults] = useState(searchTracks);
+  const [searchResults, setSearchResults] = useState([]);
 
   const savePlaylist = () => {
     const trackURIs = playlist.map((track) => track.uri);
